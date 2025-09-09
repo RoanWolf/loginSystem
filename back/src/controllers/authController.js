@@ -2,7 +2,7 @@ import svgCaptcha from "svg-captcha";
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcrypt";
 
-import redis from "../config/redisHelper.js";
+import redis from "../utils/redisHelper.js";
 import db from "../models/index.js";
 import logger from "../utils/logger.js";
 import { markEmail } from "../utils/mark.js";

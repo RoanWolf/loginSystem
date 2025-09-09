@@ -1,15 +1,20 @@
 import { Sequelize } from "sequelize";
-import logger from "../utils/logger.js";
-// 用环境变量控制，避免硬编码
+
+import logger from "./logger.js";
+import { dbConfig } from "../config/config.js";
+
+
+// console.log(dbConfig);
+
 const sequelize = new Sequelize(
-  process.env.DB_NAME || "loginStorage",
-  process.env.DB_USER || "root",
-  process.env.DB_PASS || "mutable",
+  dbConfig.database,
+  dbConfig.user,
+  dbConfig.password,
   {
-    host: process.env.DB_HOST || "127.0.0.1",
-    dialect: "mysql",
+    host: dbConfig.host,
+    dialect: dbConfig.dialect,
     logging: false,
-    port: process.env.DB_PORT || 3308,
+    port: dbConfig.port,
   }
 );
 (async () => {

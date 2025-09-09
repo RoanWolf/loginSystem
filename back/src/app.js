@@ -3,7 +3,7 @@ import cors from "cors";
 
 
 import auth from "./routes/auth.js";
-import limiter from './config/rateLimit.js'
+import limiter from './utils/rateLimit.js'
 const app = express();
 
 app.use(cors());

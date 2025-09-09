@@ -1,12 +1,13 @@
 import Redis from "ioredis";
+import { redisConfig } from "../config/config.js";
+
 
 let redis;
-
 function getRedis() {
   if (!redis) {
     redis = new Redis({
-      host: "127.0.0.1",
-      port: 6379,
+      host: redisConfig.host,
+      port: redisConfig.port
     });
   }
   return redis;
