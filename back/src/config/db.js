@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-
+import logger from "../utils/logger.js";
 // 用环境变量控制，避免硬编码
 const sequelize = new Sequelize(
   process.env.DB_NAME || "loginStorage",
@@ -15,11 +15,13 @@ const sequelize = new Sequelize(
 (async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({ alter: true });
+
+    //await sequelize.sync({ alter: true });
+
     // await sequelize.sync({force: true}); // ❌别乱用
-    console.log("✅ Database connection has been established successfully.");
+    logger.info("Database connection has been established successfully.");
   } catch (error) {
-    console.error("❌ Unable to connect to the database:", error);
+    logger.error("Database connection error");
   }
 })();
 
