@@ -1,5 +1,6 @@
 import svgCaptcha from "svg-captcha";
 import { v4 as uuidv4 } from "uuid";
+import bcrypt from "bcrypt";
 
 import redis from "../config/redisHelper.js";
 import db from "../models/index.js";
@@ -13,10 +14,10 @@ const register = async (req, res) => {
     if (user) {
       return res.status(400).send("user already exists");
     }
-
+    const hash = await bcrypt.hash(password, 10);
     await db.User.create({
       email,
-      password,
+      password: hash
     });
   } catch (error) {
     return res.status(500).send(error.message);
@@ -37,7 +38,8 @@ const login = async (req, res) => {
     if (!user) {
       return res.status(401).send("user not found");
     }
-    if (user.password !== password) {
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
       return res.status(401).send("invalid password");
     }
 

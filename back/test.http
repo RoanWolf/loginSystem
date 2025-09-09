@@ -1,20 +1,20 @@
-POST http://localhost:3000/api/auth/register http/1.1
-Content-Type: application/json
+# POST http://localhost:3000/api/auth/register http/1.1
+# Content-Type: application/json
 
-{
-  "email":"fnws",
-  "password":"jfodwjfow",
-  "uuid":1,
-  "inputCode":1
-}
+# {
+#   "email":"fnsws",
+#   "password":"jfodwjfow",
+#   "uuid":1,
+#   "inputCode":1
+# }
 
 
 # POST http://localhost:3000/api/auth/login http/1.1
 # Content-Type: application/json
 
 # {
-#   "email":1,
-#   "password":1
+#   "email":"fnws",
+#   "password":"jfodwjfow"
 # }
 
 # GET http://localhost:3000/api/auth/captcha http/1.1

@@ -10,15 +10,14 @@ const sequelize = new Sequelize(
     dialect: "mysql",
     logging: false,
     port: process.env.DB_PORT || 3308,
-  
   }
 );
 (async () => {
   try {
-    await sequelize.authenticate();  
-   // await sequelize.sync({ alter: true }); 
+    await sequelize.authenticate();
+    await sequelize.sync({ alter: true });
+    // await sequelize.sync({force: true}); // ❌别乱用
     console.log("✅ Database connection has been established successfully.");
-
   } catch (error) {
     console.error("❌ Unable to connect to the database:", error);
   }
