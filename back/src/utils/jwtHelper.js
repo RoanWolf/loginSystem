@@ -1,0 +1,11 @@
+import jwt from "jsonwebtoken";
+
+// 登录成功时调用
+function getToken(email) {
+  return jwt.sign(
+    email,
+    process.env.JWT_SECRET // 从环境变量读取密钥
+  );
+}
+
+export { getToken };
