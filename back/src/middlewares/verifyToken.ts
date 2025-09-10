@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
-import logger from "../utils/logger.js";
-export const verifyToken = (req, res, next) => {
+import type {Request,Response,NextFunction} from 'express'
+import logger from "../utils/logger.ts";
+export const verifyToken = (req:Request, res:Response, next:NextFunction) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1]; // Bearer xxx
 
@@ -10,10 +11,10 @@ export const verifyToken = (req, res, next) => {
 
   try {
 
-    jwt.verify(token, process.env.JWT_SECRET);
+    jwt.verify(token, process.env.JWT_SECRET as string);
     next();
     
-  } catch (err) {
+  } catch (err:unknown) {
     return res.status(403).json({ message: "Invalid token" });
   }
 };

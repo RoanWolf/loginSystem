@@ -1,20 +1,19 @@
-import { Sequelize } from "sequelize";
+import { Sequelize, Dialect } from "sequelize";
 
-import logger from "./logger.js";
-import { dbConfig } from "../config/config.js";
-
+import logger from "./logger.ts";
+import { dbConfig } from "../configs/config.ts";
 
 // console.log(dbConfig);
 
 const sequelize = new Sequelize(
-  dbConfig.database,
-  dbConfig.user,
-  dbConfig.password,
+  dbConfig.database || "",
+  dbConfig.user || "root",
+  dbConfig.password || "",
   {
-    host: dbConfig.host,
-    dialect: dbConfig.dialect,
+    host: dbConfig.host || "localhost",
+    dialect: (dbConfig.dialect as Dialect) || "mysql",
     logging: false,
-    port: dbConfig.port,
+    port: Number(dbConfig.port) || 3306,
   }
 );
 (async () => {
@@ -25,7 +24,7 @@ const sequelize = new Sequelize(
 
     // await sequelize.sync({force: true}); // ❌别乱用
     logger.info("Database connection has been established successfully.");
-  } catch (error) {
+  } catch (error: unknown) {
     logger.error("Database connection error");
   }
 })();

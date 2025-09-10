@@ -2,9 +2,9 @@ import express from "express";
 import cors from "cors";
 
 
-import auth from "./routes/auth.js";
-import limiter from './utils/rateLimit.js'
-import {verifyToken} from './middlewares/verifyToken.js'
+import auth from "./routes/auth.ts";
+import limiter from './utils/rateLimit.ts'
+import {verifyToken} from './middlewares/verifyToken.ts'
 const app = express();
 
 app.use(cors());

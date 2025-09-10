@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 
-import sequelize from "../utils/dbHelper.js";
+import sequelize from "../utils/dbHelper.ts";
 const User = sequelize.define(
   "User",
   {

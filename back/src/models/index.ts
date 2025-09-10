@@ -1,4 +1,4 @@
-import sequelize from "../utils/dbHelper.js";
+import sequelize from "../utils/dbHelper.ts";
 import User from "./User.js";
 
 const db = {

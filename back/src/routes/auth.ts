@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import {register, login, captcha} from '../controllers/authController.js'
+import {register, login, captcha} from '../controllers/authController.ts'
 const router = Router();
 
 router.route("/register").post(register);

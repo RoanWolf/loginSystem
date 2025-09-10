@@ -1,7 +1,7 @@
 import svgCaptcha from "svg-captcha";
 import { v4 as uuidv4 } from "uuid";
 
-import { captchaConfig } from "../config/config.js";
+import { captchaConfig } from "../configs/config.ts";
 
 const { text, data } = svgCaptcha.create(captchaConfig);
 const uuid = uuidv4();
