@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import type {Request,Response,NextFunction} from 'express'
-import logger from "../utils/logger.ts";
+
 export const verifyToken = (req:Request, res:Response, next:NextFunction) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1]; // Bearer xxx

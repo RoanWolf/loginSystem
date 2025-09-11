@@ -1,32 +1,26 @@
-import { Sequelize, Dialect } from "sequelize";
-
+// utils/dbHelper.ts
+import mysql from "mysql2/promise";
+import { drizzle } from "drizzle-orm/mysql2";
 import logger from "./logger.ts";
 import { dbConfig } from "../configs/config.ts";
 
-// console.log(dbConfig);
+const pool = mysql.createPool({
+  host: dbConfig.host,
+  user: dbConfig.user,
+  password: dbConfig.password,
+  database: dbConfig.database,
+  port: Number(dbConfig.port),
+});
 
-const sequelize = new Sequelize(
-  dbConfig.database || "",
-  dbConfig.user || "root",
-  dbConfig.password || "",
-  {
-    host: dbConfig.host || "localhost",
-    dialect: (dbConfig.dialect as Dialect) || "mysql",
-    logging: false,
-    port: Number(dbConfig.port) || 3306,
-  }
-);
+export const db = drizzle(pool);
+
 (async () => {
   try {
-    await sequelize.authenticate();
-
-    //await sequelize.sync({ alter: true });
-
-    // await sequelize.sync({force: true}); // ❌别乱用
+    const conn = await pool.getConnection();
+    await conn.ping(); 
+    conn.release();
     logger.info("Database connection has been established successfully.");
-  } catch (error: unknown) {
+  } catch (error) {
     logger.error("Database connection error");
   }
 })();
-
-export default sequelize;
